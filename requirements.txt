@@ -33,7 +33,7 @@ pandas==2.3.0
 pillow==11.3.0
 platformdirs==4.3.8
 protobuf==5.29.5
-pyarrow==20.0.0
+pyarrow==18.0.0
 pycparser==2.22
 pydeck==0.9.1
 PyJWT==2.10.1
