@@ -57,6 +57,12 @@ Time_spent_Alone,Stage_fear,Social_event_attendance,Going_outside,Drained_after_
   - 실시간 필터링 및 대시보드 형태의 결과 공유  
   - 사용자 친화적인 웹 UI 제공
 
+### 🧠 머신러닝 모델링
+- **Scikit-learn**
+  - `RandomForestClassifier` 로 성격 유형 분류 모델 구현
+  - `train_test_split` , `accuracy_score`, `classification_report` 등으로 성능 평가
+  - `predict_proba()` 로 예측 결과에 대한 확률 출력
+
 ### 🏢 데이터 웨어하우스
 - **Snowflake**  
   - `Snowpark` API로 SQL 없이 파이썬 코드로 데이터 조작 가능  
@@ -94,3 +100,13 @@ dtype: int64
 🚨 TIME_SPENT_ALONE 이상치 개수: 0
 ```
 
+### 🧪 모델 평가 결과 (`RandomForestClassifier`)
+
+| Metric        | Introvert | Extrovert | Macro Avg | Weighted Avg |
+|---------------|-----------|-----------|-----------|--------------|
+| **Precision** | 0.91      | 0.94      | 0.92      | 0.92         |
+| **Recall**    | 0.93      | 0.91      | 0.92      | 0.92         |
+| **F1-score**  | 0.92      | 0.92      | 0.92      | 0.92         |
+| **Support**   | 278       | 302       | 580       | 580          |
+
+- 🎯 **정확도(Accuracy)**: `0.92`
