@@ -29,6 +29,7 @@ Time_spent_Alone,Stage_fear,Social_event_attendance,Going_outside,Drained_after_
 3.0,No,9.0,6.0,No,15.0,5.0,Extrovert
 10.0,Yes,3.0,1.0,Yes,4.0,0.0,Introvert
 2.0,No,6.0,4.0,No,12.0,10.0,Extrovert
+...
 ```
 
 ### 컬럼설명
@@ -41,3 +42,55 @@ Time_spent_Alone,Stage_fear,Social_event_attendance,Going_outside,Drained_after_
 - `Friends_circle_size`: 친밀한 친구나 교류하는 사람의 수 (네트워크 크기)
 - `Post_frequency`: SNS(소셜미디어)에서 게시물을 올리는 빈도
 - `Personality`: 해당 사람의 성격 유형 (Extrovert: 외향형 / Introvert: 내향형)
+
+## 🧰 데이터 분석 및 시각화 스택
+
+### 📊 데이터 처리
+- **Pandas**  
+  - Snowflake 테이블 또는 AWS S3에서 불러온 데이터를 전처리 및 집계
+  - 결측치 처리, 그룹별 평균 계산 등 통계 분석 수행
+
+### 📈 데이터 시각화
+- **Plotly**  
+  - 막대그래프, 히스토그램 등 대화형 시각화 구현  
+- **Streamlit**  
+  - 실시간 필터링 및 대시보드 형태의 결과 공유  
+  - 사용자 친화적인 웹 UI 제공
+
+### 🏢 데이터 웨어하우스
+- **Snowflake**  
+  - `Snowpark` API로 SQL 없이 파이썬 코드로 데이터 조작 가능  
+  - `STAGE`, `COPY INTO`, `FILE FORMAT` 등으로 외부 S3 데이터 적재  
+  - Role 기반으로 접근 권한 제어
+
+### ☁️ 클라우드 연동
+- **AWS S3**  
+  - 설문/로그 등 원시 데이터를 저장하는 데이터 레이크 역할  
+- **IAM Role 연동**  
+  - Snowflake에서 S3에 접근할 수 있도록 외부 스테이지에 Role 부여
+
+
+### 결측치 및 이상치 분석
+
+```
+📌 컬럼별 결측치 개수:
+TIME_SPENT_ALONE             0
+STAGE_FEAR                   0
+SOCIAL_EVENT_ATTENDANCE      0
+GOING_OUTSIDE                0
+DRAINED_AFTER_SOCIALIZING    0
+FRIENDS_CIRCLE_SIZE          0
+POST_FREQUENCY               0
+PERSONALITY                  0
+dtype: int64
+--------------------------------------------------
+📊 TIME_SPENT_ALONE 컬럼의 IQR 분석:
+  - Q1 (25%): 2.0
+  - Q3 (75%): 7.0
+  - IQR      : 5.0
+  - 하한선 (Q1 - 1.5*IQR): -5.5
+  - 상한선 (Q3 + 1.5*IQR): 14.5
+--------------------------------------------------
+🚨 TIME_SPENT_ALONE 이상치 개수: 0
+```
+
