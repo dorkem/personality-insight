@@ -2,8 +2,10 @@
 
 ### 명령어
 ```bash
-source venv/bin/activate # 가상환경 활성화
-pip freeze > requirements.txt # 현재 환경의 패키지 목록 저장
+source venv/bin/activate        # 맥 가상환경 활성화
+.\venv\Scripts\Activate.ps1     # 윈도우 가상환경 활성화
+pip freeze > requirements.txt   # 현재 환경의 패키지 목록 저장
+pip install -r requirements.txt # 설치
 ```
 
 ## 데이터 분석
