@@ -93,3 +93,65 @@ fig2 = px.bar(
     title="📊 입력 변수 중요도"
 )
 st.plotly_chart(fig2)
+
+st.subheader("4️⃣ 사용자 행동 데이터로 성격 예측하기")
+
+# 사용자 입력 받기
+with st.form("prediction_form"):
+    st.write("🧑 당신의 행동을 입력해보세요:")
+    alone = st.slider("혼자 있는 시간 (시간)", 0.0, 12.0, 4.0, step=0.5)
+    stage_fear = st.selectbox("무대 공포감이 있나요?", ["No", "Yes"])
+    events = st.slider("사회적 모임 참석 횟수", 0.0, 10.0, 5.0)
+    outside = st.slider("외출 횟수", 0.0, 10.0, 5.0)
+    drained = st.selectbox("사회활동 후 피곤함을 느끼나요?", ["No", "Yes"])
+    friends = st.slider("친구 수", 0.0, 20.0, 8.0)
+    posts = st.slider("SNS 게시 빈도", 0.0, 10.0, 5.0)
+
+    submitted = st.form_submit_button("성격 예측")
+
+# 입력을 바탕으로 예측
+if submitted:
+    input_df = pd.DataFrame([{
+        "TIME_SPENT_ALONE": alone,
+        "STAGE_FEAR": 1 if stage_fear == "Yes" else 0,
+        "SOCIAL_EVENT_ATTENDANCE": events,
+        "GOING_OUTSIDE": outside,
+        "DRAINED_AFTER_SOCIALIZING": 1 if drained == "Yes" else 0,
+        "FRIENDS_CIRCLE_SIZE": friends,
+        "POST_FREQUENCY": posts
+    }])
+
+    prediction = model.predict(input_df)[0]
+    pred_label = "Extrovert" if prediction == 1 else "Introvert"
+
+    st.success(f"🧠 예측된 성격 유형: **{pred_label}**")
+
+    # 예측 결과 및 확률
+    prediction = model.predict(input_df)[0]
+    pred_label = "Extrovert" if prediction == 1 else "Introvert"
+    proba = model.predict_proba(input_df)[0]
+
+    introvert_prob = proba[0] * 100
+    extrovert_prob = proba[1] * 100
+
+    st.success(f"🧠 예측된 성격 유형: **{pred_label}**")
+    st.write(f"🔍 내향적일 확률: **{introvert_prob:.1f}%**, 외향적일 확률: **{extrovert_prob:.1f}%**")
+
+    # 원형 차트 표시 (Pie Chart)
+    pie_df = pd.DataFrame({
+        "성격 유형": ["Introvert", "Extrovert"],
+        "확률 (%)": [introvert_prob, extrovert_prob]
+    })
+
+    fig_pie = px.pie(pie_df, names="성격 유형", values="확률 (%)",
+                     title="🧠 성격 예측 확률 분포", color="성격 유형",
+                     color_discrete_map={"Introvert": "#636EFA", "Extrovert": "#EF553B"})
+    fig_pie.update_traces(textinfo="label+percent")
+    st.plotly_chart(fig_pie)
+
+    # 간단한 코칭 문구
+    if pred_label == "Introvert":
+        st.info("💬 혼자 있는 시간이 중요합니다. 너무 고립되지 않게 작은 만남을 시도해보세요.")
+    else:
+        st.info("💬 사람들과의 교류에서 에너지를 얻는 스타일입니다. 하지만 무리한 스케줄은 피해주세요.")
+
