@@ -8,8 +8,30 @@ pip freeze > requirements.txt   # 현재 환경의 패키지 목록 저장
 pip install -r requirements.txt # 설치
 ```
 
+## 동작 사진
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/fecfab5f-e3fa-4015-b421-62e29a992f04" width="400">
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/8ece6ca9-8f55-40ab-9a21-1b8289581da2" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align:center">
+      <img src="https://github.com/user-attachments/assets/967b4196-7e03-489c-af2e-de243574e3c0" width="800">
+    </td>
+  </tr>
+</table>
+
+
+
 ## 데이터 분석
 ### 주제: Extrovert vs. Introvert Behavior Data
+
+- Extrovert 및 Introvert의 특징을 도표로 정리하고 간단한 설문조사를 통한 성향분석 프로그램을 개발한다.
+
 #### 링크
 https://www.kaggle.com/datasets/rakeshkapilavai/extrovert-vs-introvert-behavior-data/data
 
