@@ -20,7 +20,7 @@ pip install -r requirements.txt # 설치
   </tr>
   <tr>
     <td colspan="2" style="text-align:center">
-      <img src="https://github.com/user-attachments/assets/967b4196-7e03-489c-af2e-de243574e3c0" width="800">
+      <img src="https://github.com/user-attachments/assets/967b4196-7e03-489c-af2e-de243574e3c0" width="500">
     </td>
   </tr>
 </table>
